@@ -1,0 +1,170 @@
+
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "margin-top": 6,
+  "margin-left": 10,
+  "margin-right": 10,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/media-control",
+    "custom/media-title",
+    "wlr/taskbar"
+  ],
+
+  "modules-center": [
+    "hyprland/window"
+  ],
+
+  "modules-right": [
+    "group/system",
+    "custom/wifi",
+    "clock",
+    "custom/notification",
+    "custom/power"
+  ],
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "active": ""
+    }
+  },
+
+  "custom/media-control": {
+    "exec": "~/.config/waybar/scripts/media_control.sh",
+    "interval": 1,
+    "on-click": "playerctl play-pause",
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/media-title": {
+    "exec": "~/.config/waybar/scripts/media_title.sh",
+    "interval": 2,
+    "return-type": "json",
+    "tooltip": true
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "spacing": 6,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+    },
+
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 40
+  },
+
+  "group/system": {
+    "orientation": "horizontal",
+    "drawer": {
+        "transition-duration": 300,
+        "click-to-reveal": true
+    },
+    "modules": [
+        "custom/system-arrow",
+        "custom/bluetooth",
+        "battery",
+        "custom/brightness",
+        "custom/hyprsunset",
+        "custom/volume"
+    ]
+  },
+
+  "clock": {
+        "format": "{:%I:%M %p}",
+        "rotate": 0,
+        "tooltip-format": "<tt>{calendar}</tt>",
+            "calendar": {
+                "mode": "month",
+                "mode-mon-col": 3,
+                "on-scroll": 1,
+                "on-click-right": "mode",
+                "format": {
+                    "months": "<span color='#ffead3'><b>{}</b></span>",
+                    "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                    "today": "<span color='#ff6699'><b>{}</b></span>"
+                }
+            }
+  },
+
+  "custom/system-arrow": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "custom/wifi": {
+    "exec": "~/.config/waybar/scripts/wifi.sh",
+    "interval": 5,
+    "return-type": "json",
+    "on-click": "~/.config/waybar/scripts/wifi_menu.sh"
+    },
+    
+  "custom/volume": {
+    "exec": "~/.config/waybar/scripts/volumn.sh",
+    "interval": 2,
+    "tooltip": false,
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+
+  "custom/bluetooth": {
+    "exec": "/home/rish/.config/waybar/scripts/bluetooth.sh",
+    "interval": 5,
+    "return-type": "json",
+    "on-click": "/home/rish/.config/waybar/scripts/bluetooth_menu.sh"
+  },
+
+  "custom/brightness": {
+    "exec": "~/.config/waybar/scripts/brightness.sh",
+    "interval": 2,
+    "tooltip": false,
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+  "custom/hyprsunset": {
+    "exec": "~/.config/waybar/scripts/hyprsunset.sh",
+    "interval": 2,
+    "return-type": "json",
+    "on-click": "~/.config/waybar/scripts/hyprsunset_toggle.sh",
+    "on-scroll-up": "~/.config/waybar/scripts/hyprsunset_scroll.sh up",
+    "on-scroll-down": "~/.config/waybar/scripts/hyprsunset_scroll.sh down",
+    "tooltip": true
+  },
+
+  "battery": {
+    "format": "{icon}",
+    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "tooltip": true,
+    "tooltip-format-plugged": "Status: Plugged\nLvl: {capacity}%",
+    "tooltip-format-charging": "Status: Charging\nLvl: {capacity}%",
+    "tooltip-format-discharging": "Status: Discharging\nLvl: {capacity}%",
+    "tooltip-format-full": "Status: Full\nLvl: {capacity}%"
+  },
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power.sh"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+        "notification": "",
+        "none": ""
+    },
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t",
+    "on-click-right": "swaync-client -d"
+  },
+}
+

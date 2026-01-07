@@ -1,0 +1,17 @@
+# Secrets
+*.key
+*.pem
+*.env
+
+# Cache / state
+.cache/
+.local/share/
+.local/state/
+.local/share/nvim/
+.cache/nvim/
+.local/state/nvim/
+
+# Editor junk
+*.swp
+*.bak
+
