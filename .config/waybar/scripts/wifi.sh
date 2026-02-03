@@ -1,16 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Not in use cuurently
+# Check active Wi-Fi
+WIFI_INFO=$(nmcli -t -f DEVICE,TYPE,STATE dev status | grep ':wifi:connected')
+ETH_INFO=$(nmcli -t -f DEVICE,TYPE,STATE dev status | grep ':ethernet:connected')
 
-SSID=$(nmcli -t -f ACTIVE,SSID dev wifi 2>/dev/null | grep '^yes' | cut -d: -f2)
-SIGNAL=$(nmcli -t -f ACTIVE,SIGNAL dev wifi 2>/dev/null | grep '^yes' | cut -d: -f2)
-IP=$(ip -4 addr show | awk '/inet / && !/127.0.0.1/ {print $2; exit}' | cut -d/ -f1)
+if [ -n "$WIFI_INFO" ]; then
+    SSID=$(nmcli -t -f ACTIVE,SSID dev wifi | grep '^yes' | cut -d: -f2)
+    SIGNAL=$(nmcli -t -f ACTIVE,SIGNAL dev wifi | grep '^yes' | cut -d: -f2)
 
-if [ -z "$SSID" ]; then
-  echo '{"text":"󰤭","tooltip":"Wi-Fi disconnected"}'
+    SIGNAL=${SIGNAL:-"?"}
+    SSID=${SSID:-"Unknown"}
+
+    echo "{\"text\":\"󰤨\",\"tooltip\":\"Wi-Fi: $SSID\nSignal: ${SIGNAL}%\"}"
+
+elif [ -n "$ETH_INFO" ]; then
+    echo "{\"text\":\"󰈀\",\"tooltip\":\"Wired connection\"}"
+
 else
-  SIGNAL=${SIGNAL:-"?"}
-  IP=${IP:-"N/A"}
-
-  echo "{\"text\":\"󰤨\",\"tooltip\":\"SSID: $SSID\nSignal: ${SIGNAL}%\nIP: $IP\"}"
+    echo "{\"text\":\"󰤭\",\"tooltip\":\"No network connection\"}"
 fi
-
-

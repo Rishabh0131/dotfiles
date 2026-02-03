@@ -1,0 +1,159 @@
+/* --- COLOR DEFINITIONS --- */
+@define-color cc-bg #1a1a1a;                /* Solid Grey-Black Background */
+@define-color noti-bg #242424;              /* Slightly lighter card background */
+@define-color noti-bg-hover #2d2d2d;        /* Hover state for items */
+@define-color noti-border #32302f;          /* Subtle borders */
+
+@define-color text-main #ebdbb2;            /* Creamy white text */
+@define-color text-dim #928374;             /* Muted grey text */
+@define-color accent-color #ffffff;         /* White highlights */
+@define-color critical-color #fb4934;       /* Red for close/warning */
+
+/* --- GLOBAL SETTINGS --- */
+* {
+    font-family: "JetBrainsMono NFP";
+    font-weight: bold;
+    font-size: 14px;
+    color: @text-main;
+}
+
+/* --- CONTROL CENTER MAIN --- */
+.control-center {
+    background: @cc-bg;
+}
+
+.control-center-list {
+    background: transparent;
+}
+
+/* --- NOTIFICATIONS --- */
+.notification-row {
+    outline: none;
+    margin: 5px;
+    padding: 0;
+}
+
+.notification-content {
+    background: @noti-bg;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid @noti-border;
+    margin: 0;
+}
+
+.control-center .notification-row:focus,
+.control-center .notification-row:hover {
+    background: @noti-bg-hover;
+    border-radius: 12px;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+    background: @noti-bg-hover;
+}
+
+/* --- TEXT STYLES --- */
+.summary {
+    font-size: 14px;
+    color: @accent-color;
+    padding-bottom: 4px;
+}
+
+.time {
+    font-size: 11px;
+    color: @text-dim;
+    margin-right: 20px;
+}
+
+.body {
+    font-size: 12px;
+    color: @text-main;
+    font-weight: normal;
+}
+
+/* --- BUTTONS --- */
+.close-button {
+    background: transparent;
+    padding: 0; 
+    margin-top: 5px;
+    margin-right: 5px;
+    border: none;
+    box-shadow: none;
+}
+
+.close-button:hover {
+    background: transparent;
+    transition: color .15s ease-in-out;
+}
+
+.notification-action {
+    color: @text-main;
+    background: @noti-border;
+    border: none;
+    border-radius: 6px;
+    margin: 4px;
+}
+
+/* --- WIDGETS (DND, MPRIS, TITLE) --- */
+.widget-title {
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.widget-title > button {
+    color: @cc-bg;
+    background: transparent;
+    border-radius: 8px;
+    padding: 4px 10px;
+}
+
+.widget-dnd {
+    background: @noti-bg;
+    margin: 10px;
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 1px solid @noti-border;
+}
+
+.widget-dnd > switch {
+    border-radius: 8px;
+    background: @noti-border;
+}
+
+.widget-dnd > switch:checked {
+    background: #878786;
+}
+
+.widget-dnd > switch slider {
+    background: #020302;
+    border-radius: 6px;
+}
+
+/* --- MUSIC PLAYER (MPRIS) --- */
+.widget-mpris {
+    background: transparent;
+}
+
+.widget-mpris-title {
+    font-size: 1.1rem;
+    color: @accent-color;
+}
+
+.widget-mpris-subtitle {
+    font-size: 0.9rem;
+    color: @text-dim;
+}
+
+/* --- VOLUME & BRIGHTNESS SLIDERS --- */
+.widget-volume scale trough,
+.widget-backlight scale trough {
+    background: @noti-border;
+    min-height: 6px;
+    border-radius: 10px;
+}
+
+.widget-volume scale highlight,
+.widget-backlight scale highlight {
+    background: @accent-color;
+    border-radius: 10px;
+}

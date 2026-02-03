@@ -19,8 +19,9 @@
   ],
 
   "modules-right": [
+    "custom/updates",
     "group/system",
-    "custom/wifi",
+    "tray",
     "clock",
     "custom/notification",
     "custom/power"
@@ -28,11 +29,14 @@
 
   "hyprland/workspaces": {
     "disable-scroll": true,
-    "format": "{icon}",
-    "format-icons": {
-      "default": "",
-      "active": ""
-    }
+    "all-outputs": false,
+
+    "persistent-workspaces": {
+        "*": 3
+    },
+
+    "format": "{name}",
+    "on-click": "activate"
   },
 
   "custom/media-control": {
@@ -72,27 +76,26 @@
         "custom/system-arrow",
         "custom/bluetooth",
         "battery",
-        "custom/brightness",
         "custom/hyprsunset",
         "custom/volume"
     ]
   },
 
   "clock": {
-        "format": "{:%I:%M %p}",
-        "rotate": 0,
-        "tooltip-format": "<tt>{calendar}</tt>",
-            "calendar": {
-                "mode": "month",
-                "mode-mon-col": 3,
-                "on-scroll": 1,
-                "on-click-right": "mode",
-                "format": {
-                    "months": "<span color='#ffead3'><b>{}</b></span>",
-                    "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-                    "today": "<span color='#ff6699'><b>{}</b></span>"
-                }
-            }
+    "format": "{:%I:%M %p}",
+    "rotate": 0,
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+        "mode": "month",
+        "mode-mon-col": 3,
+        "on-scroll": 1,
+        "on-click-right": "mode",
+        "format": {
+            "months": "<span color='#ffead3'><b>{}</b></span>",
+            "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+            "today": "<span color='#ff6699'><b>{}</b></span>"
+        }
+    }
   },
 
   "custom/system-arrow": {
@@ -100,27 +103,34 @@
     "tooltip": false
   },
 
-  "custom/wifi": {
-    "exec": "~/.config/waybar/scripts/wifi.sh",
-    "interval": 5,
+  "custom/updates": {
+    "format": "  {}",
+    "escape": true,
     "return-type": "json",
-    "on-click": "~/.config/waybar/scripts/wifi_menu.sh"
-    },
+    "exec": "/home/rish/.config/waybar/scripts/updates.sh",
+    "interval": 1800,
+    "signal": 1,
+    "hide-empty-text": true,
+    "on-click": "ghostty -e bash -ic '/home/rish/.config/waybar/scripts/installupdates.sh'"
+  },
+  
+  "tray": {
+    "spacing": 10
+  },
     
   "custom/volume": {
     "exec": "~/.config/waybar/scripts/volumn.sh",
     "interval": 2,
     "tooltip": false,
-    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
 
   "custom/bluetooth": {
     "exec": "/home/rish/.config/waybar/scripts/bluetooth.sh",
     "interval": 5,
     "return-type": "json",
-    "on-click": "/home/rish/.config/waybar/scripts/bluetooth_menu.sh"
+    "on-click": "hyprctl dispatch exec '[float;center;size 900 480] blueman-manager'"
   },
 
   "custom/brightness": {
@@ -155,16 +165,24 @@
     "on-click": "~/.config/waybar/scripts/power.sh"
   },
   "custom/notification": {
-    "tooltip": false,
+    "tooltip": true,
     "format": "{icon}",
     "format-icons": {
-        "notification": "",
-        "none": ""
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
     },
     "return-type": "json",
+    "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t",
-    "on-click-right": "swaync-client -d"
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
 }
 

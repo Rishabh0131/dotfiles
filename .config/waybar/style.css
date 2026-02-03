@@ -19,11 +19,76 @@ window#waybar {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+ /* Tray Styling */
+#tray {
+  margin: 5px 6px;
+  padding: 4px 12px;
+  border-radius: 14px;
+
+  background: rgba(25, 25, 25, 0.6);
+}
+
+#tray:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Updates Styling */
+#custom-updates {
+    background-color: rgba(25, 25, 25, 0.6);
+    font-size: 16px;
+    color: #cdd6f4;
+    border-radius: 14px;
+    padding: 0 15px;
+    margin: 4px 6px;
+    border: 2px solid #45475a;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* GREEN (up-to-date) */
+
+#custom-updates.green {
+    background-color: rgba(25, 25, 25, 0.6);
+    color: #cdd6f4;
+    border-color: #45475a;
+}
+
+#custom-updates.green:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #2ecc71;
+}
+
+/* YELLOW (updates available) */
+
+#custom-updates.yellow {
+    background-color: #f9e2af;
+    color: #1e1e2e;
+    border-color: #f9e2af;
+}
+
+#custom-updates.yellow:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #f1c40f;
+}
+
+/* RED (critical updates) */
+
+#custom-updates.red {
+    background-color: #d90429;
+    color: #ffffff;
+    border-color: #d90429;
+}
+
+#custom-updates.red:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #c1121f;
+}
+
 /* General module pill */
-#workspaces,
 #window,
 #clock,
-#custom-wifi,
 #custom-volume,
 #custom-power {
   background: rgba(25, 25, 25, 0.6);
@@ -34,14 +99,35 @@ window#waybar {
 }
 
 /* Workspaces */
+#workspaces {
+  background: rgba(25, 25, 25, 0.6);
+  margin: 5px 6px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
 #workspaces button {
-  padding: 0 6px;
+  padding: 4px 8px;
+  margin: 0 3px;
+  border-radius: 10px;
+
+  font-size: 8px;
+  min-width: 22px;
+
+  color: rgba(255, 255, 255, 0.6);
   background: transparent;
-  color: #777;
+  border: none;
 }
 
 #workspaces button.active {
-  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+#workspaces button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
 }
 
 /* Taskbar container */
@@ -123,12 +209,6 @@ window#waybar {
   padding-right: 10px;
 }
 
-#custom-wifi {
-  min-width: 36px;
-  padding-left: 10px;
-  padding-right: 12px;
-}
-
 #custom-notification {
   padding-left: 10px;
   padding-right: 13px;
@@ -144,9 +224,7 @@ window#waybar {
 #custom-power,
 #custom-notification,
 #custom-volume,
-#custom-brightness,
 #custom-hyprsunset,
-#custom-wifi,
 #custom-bluetooth {
   font-size: 16px; /* try 18–22 */
 }
@@ -171,13 +249,11 @@ window#waybar {
 #clock:hover,
 #custom-media-control:hover,
 #custom-media-title:hover,
-#custom-wifi:hover,
 #custom-volume:hover {
   background: #ffffff;
   color: #000000;
 }
 
-#custom-wifi,
 #custom-volume {
   transition:
     background 0.2s ease,
@@ -186,17 +262,18 @@ window#waybar {
 
 #battery,
 #custom-bluetooth,
-#custom-brightness,
 #custom-hyprsunset {
   padding: 0 8px;
   transition: background 0.2s ease;
+  margin: 5px;
+  border-radius: 8px;
 }
 
 #battery:hover,
 #custom-bluetooth:hover,
-#custom-brightness:hover,
 #custom-hyprsunset:hover {
   background: rgba(255, 255, 255, 0.7);
   color: #000000;
-  border-radius: 8px;
+  border-radius: 14px;
+  margin: 5px;
 }
