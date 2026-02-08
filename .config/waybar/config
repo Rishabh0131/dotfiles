@@ -14,10 +14,6 @@
     "wlr/taskbar"
   ],
 
-  "modules-center": [
-    "hyprland/window"
-  ],
-
   "modules-right": [
     "custom/updates",
     "group/system",
@@ -42,7 +38,7 @@
   "custom/media-control": {
     "exec": "~/.config/waybar/scripts/media_control.sh",
     "interval": 1,
-    "on-click": "playerctl play-pause",
+    "on-click": "playerctl -p spotify,%any play-pause",
     "return-type": "json",
     "tooltip": false
   },

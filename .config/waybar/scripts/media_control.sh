@@ -1,16 +1,18 @@
 #!/bin/bash
 
-status=$(playerctl status 2>/dev/null)
+PLAYER="spotify,%any"
 
-# Hide widget if nothing is running or player is stopped
+status=$(playerctl -p "$PLAYER" status 2>/dev/null)
+
+# Hide widget if nothing is running or stopped
 if [ -z "$status" ] || [ "$status" = "Stopped" ]; then
     exit 0
 fi
 
 if [ "$status" = "Playing" ]; then
-    icon="󰏤" # pause icon
+    icon="󰏤" # pause
 else
-    icon="󰐊" # play icon
+    icon="󰐊" # play
 fi
 
 echo "{\"text\":\"$icon\"}"
